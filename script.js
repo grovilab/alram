@@ -242,7 +242,7 @@ async function updateWeather() {
     const res = await fetch(url);
     if (!res.ok) throw new Error("weather fetch failed");
     const data = await res.json();
-    weatherEl.textContent = `현재 기온: ${Math.round(data.main.temp)}°C`;
+    weatherEl.textContent = `현재 기온: ${Math.round(data.main.temp)}°C · 습도: ${data.main.humidity}%`;
   } catch {
     weatherEl.textContent = "기온 정보를 불러올 수 없습니다.";
   }
