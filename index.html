@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>간편 알람</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>⏰ 간편 알람</h1>
+      <div id="current-time" class="current-time">00:00:00</div>
+      <div id="current-date" class="current-date"></div>
+    </header>
+
+    <section class="add-alarm">
+      <input type="time" id="alarm-time-input" />
+      <input type="text" id="alarm-label-input" placeholder="알람 이름 (선택)" />
+      <button id="add-alarm-btn">추가</button>
+    </section>
+
+    <section class="repeat-days" id="repeat-days">
+      <button type="button" class="day-btn" data-day="0">일</button>
+      <button type="button" class="day-btn" data-day="1">월</button>
+      <button type="button" class="day-btn" data-day="2">화</button>
+      <button type="button" class="day-btn" data-day="3">수</button>
+      <button type="button" class="day-btn" data-day="4">목</button>
+      <button type="button" class="day-btn" data-day="5">금</button>
+      <button type="button" class="day-btn" data-day="6">토</button>
+    </section>
+
+    <ul id="alarm-list" class="alarm-list"></ul>
+
+    <p id="empty-msg" class="empty-msg">등록된 알람이 없습니다.</p>
+  </div>
+
+  <div id="ringing-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="ringing-icon">⏰</div>
+      <div id="ringing-label" class="ringing-label">알람</div>
+      <div id="ringing-time" class="ringing-time">00:00</div>
+      <div class="modal-buttons">
+        <button id="snooze-btn">5분 후 다시 알림</button>
+        <button id="stop-btn">끄기</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
