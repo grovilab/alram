@@ -230,3 +230,23 @@ function renderAlarms() {
 renderAlarms();
 updateClock();
 setInterval(updateClock, 1000);
+
+const WEATHER_API_KEY = "b9f79360b1c7d1b18a707adaa497c381";
+const WEATHER_LAT = 37.5665;
+const WEATHER_LON = 126.9780;
+const weatherEl = document.getElementById("weather");
+
+async function updateWeather() {
+  try {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${WEATHER_LAT}&lon=${WEATHER_LON}&appid=${WEATHER_API_KEY}&units=metric`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("weather fetch failed");
+    const data = await res.json();
+    weatherEl.textContent = `현재 기온: ${Math.round(data.main.temp)}°C`;
+  } catch {
+    weatherEl.textContent = "기온 정보를 불러올 수 없습니다.";
+  }
+}
+
+updateWeather();
+setInterval(updateWeather, 10 * 60 * 1000);

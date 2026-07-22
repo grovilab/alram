@@ -259,6 +259,13 @@ header h1 {
   display: none;
 }
 
+.weather {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 24px;
+}
+
 .modal {
   position: fixed;
   inset: 0;
