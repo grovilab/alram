@@ -56,6 +56,14 @@ header h1 {
   margin-bottom: 12px;
 }
 
+.header-image {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
 .current-time {
   font-size: 3rem;
   font-weight: 700;
