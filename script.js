@@ -79,6 +79,17 @@ function triggerAlarm(alarm) {
   ringingTime.textContent = alarm.time;
   modal.classList.remove("hidden");
   startBeep();
+  briefAlarmNews();
+}
+
+function briefAlarmNews() {
+  fetchRecentNews(NEWS_SEARCH_KEYWORD, 3)
+    .then((data) => {
+      const items = data.items || [];
+      renderNewsBriefing(items);
+      speakBriefing(buildBriefingText(items));
+    })
+    .catch(() => {});
 }
 
 function startBeep() {
@@ -114,6 +125,7 @@ function stopRinging() {
   ringingAlarmId = null;
   modal.classList.add("hidden");
   stopBeep();
+  stopBriefing();
   return id;
 }
 

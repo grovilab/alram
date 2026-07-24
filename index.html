@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>간편 알람</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="news/news.css">
 </head>
 <body>
   <div class="app">
@@ -36,6 +37,11 @@
     <p id="empty-msg" class="empty-msg">등록된 알람이 없습니다.</p>
 
     <div id="weather" class="weather">현재 기온 불러오는 중...</div>
+
+    <section class="news-section">
+      <button type="button" id="show-news-btn" class="news-toggle-btn">📰 최근뉴스</button>
+      <ul id="news-list" class="news-list"></ul>
+    </section>
   </div>
 
   <div id="ringing-modal" class="modal hidden">
@@ -43,6 +49,7 @@
       <div class="ringing-icon">⏰</div>
       <div id="ringing-label" class="ringing-label">알람</div>
       <div id="ringing-time" class="ringing-time">00:00</div>
+      <ul id="briefing-news-list" class="news-list briefing-news-list"></ul>
       <div class="modal-buttons">
         <button id="snooze-btn">5분 후 다시 알림</button>
         <button id="stop-btn">끄기</button>
@@ -50,6 +57,8 @@
     </div>
   </div>
 
+  <script src="config.js"></script>
+  <script src="news/news.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
