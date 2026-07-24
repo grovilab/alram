@@ -21,6 +21,8 @@ const ringingLabel = document.getElementById("ringing-label");
 const ringingTime = document.getElementById("ringing-time");
 const snoozeBtn = document.getElementById("snooze-btn");
 const stopBtn = document.getElementById("stop-btn");
+const saveNowBtn = document.getElementById("save-now-btn");
+const saveStatusEl = document.getElementById("save-status");
 
 function loadAlarms() {
   try {
@@ -137,6 +139,27 @@ snoozeBtn.addEventListener("click", () => {
   const id = stopRinging();
   if (id !== null) {
     snoozeUntil.set(id, Date.now() + 5 * 60 * 1000);
+  }
+});
+
+saveNowBtn.addEventListener("click", async () => {
+  saveStatusEl.textContent = "저장 중...";
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ alarms }),
+    });
+    const data = await res.json();
+    if (data.result === "success") {
+      const now = new Date();
+      const timeLabel = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+      saveStatusEl.textContent = `저장되었습니다 (${timeLabel})`;
+    } else {
+      saveStatusEl.textContent = "저장에 실패했습니다";
+    }
+  } catch {
+    saveStatusEl.textContent = "저장에 실패했습니다";
   }
 });
 

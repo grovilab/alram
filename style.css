@@ -327,6 +327,36 @@ header h1 {
   display: none;
 }
 
+.save-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.save-now-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(109, 92, 246, 0.35);
+  transition: transform 0.15s ease;
+}
+
+.save-now-btn:hover {
+  transform: translateY(-1px);
+}
+
+.save-status {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
 .weather {
   text-align: center;
   color: var(--muted);
