@@ -1,7 +1,10 @@
 const NEWS_SEARCH_KEYWORD = "최신뉴스";
 
 function stripHtmlTags(str) {
-  return String(str).replace(/<[^>]*>/g, "");
+  const withoutTags = String(str).replace(/<[^>]*>/g, "");
+  const textarea = document.createElement("textarea");
+  textarea.innerHTML = withoutTags;
+  return textarea.value;
 }
 
 function buildPubDateLabel(pubDate) {
@@ -84,11 +87,16 @@ function buildBriefingText(items) {
     .join(" ");
 }
 
+let lastBriefingText = "";
+let currentUtterance = null;
+
 function speakBriefing(text) {
+  lastBriefingText = text;
   if (!("speechSynthesis" in window)) return;
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "ko-KR";
-  speechSynthesis.speak(utterance);
+  speechSynthesis.cancel();
+  currentUtterance = new SpeechSynthesisUtterance(text);
+  currentUtterance.lang = "ko-KR";
+  speechSynthesis.speak(currentUtterance);
 }
 
 function stopBriefing() {
@@ -114,6 +122,17 @@ async function fetchRecentNews(keyword, count = 5) {
 
   const data = await res.json();
   return { ...data, items: (data.items || []).slice(0, count) };
+}
+
+const briefingPlayBtn = document.getElementById("briefing-play-btn");
+if (briefingPlayBtn) {
+  if (!("speechSynthesis" in window)) {
+    briefingPlayBtn.style.display = "none";
+  } else {
+    briefingPlayBtn.addEventListener("click", () => {
+      speakBriefing(lastBriefingText);
+    });
+  }
 }
 
 const newsToggleBtn = document.getElementById("show-news-btn");
