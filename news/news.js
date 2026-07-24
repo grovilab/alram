@@ -99,6 +99,16 @@ function speakBriefing(text) {
   speechSynthesis.speak(currentUtterance);
 }
 
+function unlockSpeechSynthesis() {
+  if (!("speechSynthesis" in window)) return;
+  const unlockUtterance = new SpeechSynthesisUtterance(" ");
+  unlockUtterance.volume = 0;
+  speechSynthesis.speak(unlockUtterance);
+}
+
+document.addEventListener("click", unlockSpeechSynthesis, { once: true });
+document.addEventListener("touchend", unlockSpeechSynthesis, { once: true });
+
 function stopBriefing() {
   if ("speechSynthesis" in window) {
     speechSynthesis.cancel();
